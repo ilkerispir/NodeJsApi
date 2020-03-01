@@ -1,8 +1,13 @@
-const http = require('http');
-const app = require('./app');
+const express = require('express');
+const app = express();
 
-const port = process.env.port || 3000;
+app.get('/', (req, res) =>{
+    res.send('Hello Node.js on App Engine Standard!');
+});
 
-const server = http.createServer(app);
+const server = app.listen(process.env.PORT || 8080, () => {
+    const host = server.address().address;
+    const port = server.address().port;
 
-server.listen(port);
+    console.log('Example app listening at http://${host}:${port}');
+});

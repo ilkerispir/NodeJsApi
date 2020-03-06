@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) =>{
-    res.send('Hello Node.js on App Engine Standard!');
+    res.render('index');
 });
 
 const server = app.listen(process.env.PORT || 8080, () => {

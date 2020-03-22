@@ -1,14 +1,18 @@
 const express = require('express');
+const getJSON = require('get-json');
+const bodyParser = require('body-parser'); 
+
 const app = express();
-var getJSON = require('get-json')
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) =>{
+app.get('/', urlencodedParser, (req, res) =>{
     let id = req.query.id;
     let url = 'https://reqres.in/api/users/' + id;
     getJSON(url, function(error, data){
-        res.render('index', {data:data.data});
+        res.render('index', {data:data.data});  
     }); 
 });
 
